@@ -543,32 +543,34 @@ assasin = sprites.create(img`
     . . . . . . f f f f f f . . . . 
     . . . . . . . f f f . . . . . . 
     `, SpriteKind.Player)
-monster = sprites.create(img`
-    . . . . . . c c c . . . . . . . 
-    . . . . . . c 5 b c . . . . . . 
-    . . . . c c c 5 5 c c c . . . . 
-    . . c c c c 5 5 5 5 c b c c . . 
-    . c b b 5 b 5 5 5 5 b 5 b b c . 
-    . c b 5 5 b b 5 5 b b 5 5 b c . 
-    . . c 5 5 5 b b b b 5 5 5 f . . 
-    . . f f 5 5 5 5 5 5 5 5 f f . . 
-    . . f f f b f e e f b f f f . . 
-    . . f f f 1 f b b f 1 f f f . . 
-    . . . f f b b b b b b f f . . . 
-    . . . e e f e e e e f e e . . . 
-    . . e b f b 5 b b 5 b c b e . . 
-    . . e e f 5 5 5 5 5 5 f e e . . 
-    . . . . c b 5 5 5 5 b c . . . . 
-    . . . . . f f f f f f . . . . . 
-    `, SpriteKind.Enemy)
+for (let index = 0; index < 4; index++) {
+    monster = sprites.create(img`
+        . . . . . . c c c . . . . . . . 
+        . . . . . . c 5 b c . . . . . . 
+        . . . . c c c 5 5 c c c . . . . 
+        . . c c c c 5 5 5 5 c b c c . . 
+        . c b b 5 b 5 5 5 5 b 5 b b c . 
+        . c b 5 5 b b 5 5 b b 5 5 b c . 
+        . . c 5 5 5 b b b b 5 5 5 f . . 
+        . . f f 5 5 5 5 5 5 5 5 f f . . 
+        . . f f f b f e e f b f f f . . 
+        . . f f f 1 f b b f 1 f f f . . 
+        . . . f f b b b b b b f f . . . 
+        . . . e e f e e e e f e e . . . 
+        . . e b f b 5 b b 5 b c b e . . 
+        . . e e f 5 5 5 5 5 5 f e e . . 
+        . . . . c b 5 5 5 5 b c . . . . 
+        . . . . . f f f f f f . . . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(monster, sprites.dungeon.floorDark1)
+    monster.follow(assasin, 15)
+}
 statusbar = statusbars.create(20, 4, StatusBarKind.Health)
 let lifeenemy = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
 statusbar.attachToSprite(assasin)
 lifeenemy.attachToSprite(monster)
 statusbar.value = 100
 lifeenemy.value = 100
-tiles.placeOnRandomTile(assasin, assets.tile`myTile`)
-tiles.placeOnRandomTile(monster, sprites.dungeon.floorDark0)
 crthealthImg()
 controller.moveSprite(assasin)
 scene.cameraFollowSprite(assasin)
@@ -682,6 +684,7 @@ for (let value2 of tiles.getTilesByType(assets.tile`myTile3`)) {
         `, SpriteKind.Object)
     tiles.placeOnTile(myRedHouse, value2)
 }
+tiles.placeOnRandomTile(assasin, assets.tile`myTile`)
 game.onUpdateInterval(5000, function () {
-    monster.follow(assasin, 15)
+	
 })
