@@ -262,53 +262,11 @@ controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
 # Deliver packages up (A) or down (B)
 
 def on_a_pressed():
-    global package2
-    package2 = sprites.create_projectile_from_sprite(img("""
-            . . . . . . . . . . . . . . . . 
-                    . . . . . . . e e e e e e e . . 
-                    . . . . . . e d d d d d e e . . 
-                    . . . . . e d d d d d d e e . . 
-                    . . . . e d d d d d d e d e . . 
-                    . . . . e e e e e e e d d e . . 
-                    . . . . e d d d d d e d d e . . 
-                    . . . . e d d d d d e d d e . . 
-                    . . . . e d d d d d e d d e . . 
-                    . . . . e d d d d d e d e e . . 
-                    . . . . e d d d d d e e e . . . 
-                    . . . . e e e e e e e e . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . .
-        """),
-        car,
-        0,
-        -50)
+    pass
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
 def on_b_pressed():
-    global package1
-    package1 = sprites.create_projectile_from_sprite(img("""
-            . . . . . . . . . . . . . . . . 
-                    . . . . . . . e e e e e e e . . 
-                    . . . . . . e d d d d d e e . . 
-                    . . . . . e d d d d d d e e . . 
-                    . . . . e d d d d d d e d e . . 
-                    . . . . e e e e e e e d d e . . 
-                    . . . . e d d d d d e d d e . . 
-                    . . . . e d d d d d e d d e . . 
-                    . . . . e d d d d d e d d e . . 
-                    . . . . e d d d d d e d e e . . 
-                    . . . . e d d d d d e e e . . . 
-                    . . . . e e e e e e e e . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . .
-        """),
-        car,
-        0,
-        50)
+    pass
 controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
 
 # Score a point for delivering packages to houses
@@ -397,9 +355,8 @@ def on_up_pressed():
         False)
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
-package1: Sprite = None
-car: Sprite = None
-package2: Sprite = None
+myRedHouse: Sprite = None
+myPurpleHouse: Sprite = None
 assasin: Sprite = None
 scene.set_background_color(7)
 tiles.set_tilemap(tilemap("""

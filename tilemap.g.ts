@@ -1,4 +1,4 @@
-// Código generado automáticamente. No editar.
+// Auto-generated code. Do not edit.
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const transparency16 = image.ofBuffer(hex``);
@@ -54,7 +54,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
             case "nivel":
-            case "nivel1":return tiles.createTilemap(hex`100010000a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a070a0a0a0a0a0a0a070a0a0a0a0b0b0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0501010101010101010101010101010a020a0d0d0d0d0d0d0d0d0d0d0d0d0d0a020d0d0d0d0d0d0d0d0d0d0d0d0d0d0a020d0d0d0d0d0d0d0d0d0a0a0a0a090a020d0a0d070d0d0d0d0d0b070909090a020d0d0d0d0d0d0d0d0d0b0b0909090a0601010101010101010101010103090a0a0a0a0a0a0a0a0a0a0a0a0a0a02090a0a0a0a0a0a090a0a0a090909090209090909080b0c0a0a0a0a08090909020909090909090c0c0c0c0909090909020909090909090c0c0c0c0c09090905040909090909090c0c0c0c0c090909020909`, img`
+            case "nivel1":return tiles.createTilemap(hex`100010000a0a0c0c0c0a0a0a0a0a0c0c0c0a0a0a0b0a0c070c0a0a0b0a0a0c070c0a0b0a0a0a0c0c0c0a0a0a0a0a0c0c0c0a0a0a0a0501010101010101010101010101010a020a0a0a0a0a0a0a0a0a0a0a0a0a0a0a020a0b0a0a0a0a0a0b0a0a0a0a0a0b0a020a0a0c0c0c0a0a0a0a0c0c0c0a0a0a020a0a0c070c0a0a0a0a0c070c0a0a0a020a0a0c0c0c0a0a0a0a0c0c0c0a0a0a06010101010101010101010101030a0a0a0a0a0a0a0a0a0a0a0a0a0a0a020a0a0a0c0c0c0a090a0a0c0c0c0a0a020a0b0a0c080c0a0a0a0a0c080c0a0a020a0a0a0c0c0c0a0b0a0a0c0c0c0a0a020a0a0a0a0a0a0a0a0a0a0a0a0a0a05040a0a0a0a0a0a0a0a0a0a0a0a0a0a020a0a`, img`
 . . 2 2 2 . . . . . 2 2 2 . . . 
 . . 2 2 2 . . . . . 2 2 2 . . . 
 . . 2 . 2 . . . . . 2 . 2 . . . 
@@ -71,7 +71,7 @@ namespace myTiles {
 . . 2 2 2 . . . . 2 2 2 . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.vehicle.roadHorizontal,sprites.vehicle.roadVertical,sprites.vehicle.roadTurn2,sprites.vehicle.roadTurn4,sprites.vehicle.roadTurn1,sprites.vehicle.roadTurn3,myTiles.tile4,myTiles.tile5,sprites.dungeon.floorDark4,sprites.dungeon.floorDark1,sprites.dungeon.floorDark3,sprites.dungeon.floorDark5,sprites.dungeon.floorDark0], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.vehicle.roadHorizontal,sprites.vehicle.roadVertical,sprites.vehicle.roadTurn2,sprites.vehicle.roadTurn4,sprites.vehicle.roadTurn1,sprites.vehicle.roadTurn3,myTiles.tile4,myTiles.tile5,sprites.dungeon.floorDark4,sprites.dungeon.floorDark1,sprites.dungeon.floorDark3,sprites.dungeon.floorDarkDiamond], TileScale.Sixteen);
         }
         return null;
     })
@@ -94,4 +94,4 @@ namespace myTiles {
     })
 
 }
-// Código generado automáticamente. No editar.
+// Auto-generated code. Do not edit.
