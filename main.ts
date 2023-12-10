@@ -294,6 +294,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
+statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
+    monster.startEffect(effects.fire)
+    sprites.destroy(monster)
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     assasin,
@@ -367,6 +371,83 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . f f . . . f f f . . . 
         `],
     500,
+    false
+    )
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    statusbar.value += -2
+    animation.runImageAnimation(
+    monster,
+    [img`
+        . . . . . . . c c c . . . . . . 
+        . . . . . . c b 5 c . . . . . . 
+        . . . . c c c 5 5 c c c . . . . 
+        . . c c b c 5 5 5 5 c c c c . . 
+        . c b b 5 b 5 5 5 5 b 5 b b c . 
+        . c b 5 5 b b 5 5 b b 5 5 b c . 
+        . . f 5 5 5 b b b b 5 5 5 c . . 
+        . . f f 5 5 5 5 5 5 5 5 f f . . 
+        . . f f f b f e e f b f f f . . 
+        . . f f f 1 f b b f 1 f f f . . 
+        . . . f f b b b b b b f f . . . 
+        . . . e e f e e e e f e e . . . 
+        . . e b c b 5 b b 5 b f b e . . 
+        . . e e f 5 5 5 5 5 5 f e e . . 
+        . . . . c b 5 5 5 5 b c . . . . 
+        . . . . . f f f f f f . . . . . 
+        `,img`
+        . . . . . . . c c c . . . . . . 
+        . . . . . . c b 5 c . . . . . . 
+        . . . . c c c 5 5 c c c . . . . 
+        . . c c b c 5 5 5 5 c c c c . . 
+        . c b b 5 b 5 5 5 5 b 5 b b c . 
+        . c b 5 5 b b 5 5 b b 5 5 b c . 
+        . . f 5 5 5 b b b b 5 5 5 c . . 
+        . . f f 5 5 5 5 5 5 5 5 f f . . 
+        . . f f f b f e e f b f f f . . 
+        . . f f f 1 f b b f 1 f f f . . 
+        . . . f f b b b b b b f f . . . 
+        . . . e e f e e e e f e e . . . 
+        . . e b c b 5 b b 5 b f b e . . 
+        . . e e f 5 5 5 5 5 5 f e e . . 
+        . . . . c b 5 5 5 5 b c . . . . 
+        . . . . . f f f f f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . c c . . . . . . . . 
+        . . . . . . c 5 c . . . . . . . 
+        . . . . c c c 5 5 c c c . . . . 
+        . . c c c c 5 5 5 5 c b c c . . 
+        . c b b 5 b 5 5 5 5 b 5 b b c . 
+        . c b 5 5 b b 5 5 b b 5 5 b c . 
+        . . c 5 5 5 b b b b 5 5 5 f . . 
+        . . f f 5 5 5 5 5 5 5 5 f f . . 
+        . . f f f b f e e f b f f f . . 
+        . . f f f 1 f b b f 1 f f f . . 
+        . . . f f b b b b e e e f . . . 
+        . . e b b f e e e e b b e . . . 
+        . . e e f 5 5 b b e b b e . . . 
+        . . . f 5 5 5 5 5 e e c . . . . 
+        . . . . f f f f f f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . c c . . . . . . 
+        . . . . . . . c 5 c . . . . . . 
+        . . . . c c c 5 5 c c c . . . . 
+        . . c c b c 5 5 5 5 c c c c . . 
+        . c b b 5 b 5 5 5 5 b 5 b b c . 
+        . c b 5 5 b b 5 5 b b 5 5 b c . 
+        . . f 5 5 5 b b b b 5 5 5 c . . 
+        . . f f 5 5 5 5 5 5 5 5 f f . . 
+        . . f f f b f e e f b f f f . . 
+        . . f f f 1 f b b f 1 f f f . . 
+        . . . f e e e b b b b f f . . . 
+        . . . e b b e e e e f b b e . . 
+        . . . e b b e b b 5 5 f e e . . 
+        . . . . c e e 5 5 5 5 5 f . . . 
+        . . . . . f f f f f f f . . . . 
+        `],
+    200,
     false
     )
 })
@@ -516,12 +597,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         statusbar.value += 5
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    lifeenemy.value += -10
+    sprites.destroy(sprite)
+})
 let projectile: Sprite = null
 let myRedHouse: Sprite = null
 let myPurpleHouse: Sprite = null
 let listafood: Image[] = []
 let snackhealth: Sprite = null
 let statusbar: StatusBarSprite = null
+let lifeenemy: StatusBarSprite = null
 let monster: Sprite = null
 let assasin: Sprite = null
 tiles.setTilemap(tilemap`nivel`)
@@ -543,34 +629,32 @@ assasin = sprites.create(img`
     . . . . . . f f f f f f . . . . 
     . . . . . . . f f f . . . . . . 
     `, SpriteKind.Player)
-for (let index = 0; index < 4; index++) {
-    monster = sprites.create(img`
-        . . . . . . c c c . . . . . . . 
-        . . . . . . c 5 b c . . . . . . 
-        . . . . c c c 5 5 c c c . . . . 
-        . . c c c c 5 5 5 5 c b c c . . 
-        . c b b 5 b 5 5 5 5 b 5 b b c . 
-        . c b 5 5 b b 5 5 b b 5 5 b c . 
-        . . c 5 5 5 b b b b 5 5 5 f . . 
-        . . f f 5 5 5 5 5 5 5 5 f f . . 
-        . . f f f b f e e f b f f f . . 
-        . . f f f 1 f b b f 1 f f f . . 
-        . . . f f b b b b b b f f . . . 
-        . . . e e f e e e e f e e . . . 
-        . . e b f b 5 b b 5 b c b e . . 
-        . . e e f 5 5 5 5 5 5 f e e . . 
-        . . . . c b 5 5 5 5 b c . . . . 
-        . . . . . f f f f f f . . . . . 
-        `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(monster, sprites.dungeon.floorDark1)
-    monster.follow(assasin, 15)
-}
-statusbar = statusbars.create(20, 4, StatusBarKind.Health)
-let lifeenemy = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
-statusbar.attachToSprite(assasin)
-lifeenemy.attachToSprite(monster)
-statusbar.value = 100
+monster = sprites.create(img`
+    . . . . . . c c c . . . . . . . 
+    . . . . . . c 5 b c . . . . . . 
+    . . . . c c c 5 5 c c c . . . . 
+    . . c c c c 5 5 5 5 c b c c . . 
+    . c b b 5 b 5 5 5 5 b 5 b b c . 
+    . c b 5 5 b b 5 5 b b 5 5 b c . 
+    . . c 5 5 5 b b b b 5 5 5 f . . 
+    . . f f 5 5 5 5 5 5 5 5 f f . . 
+    . . f f f b f e e f b f f f . . 
+    . . f f f 1 f b b f 1 f f f . . 
+    . . . f f b b b b b b f f . . . 
+    . . . e e f e e e e f e e . . . 
+    . . e b f b 5 b b 5 b c b e . . 
+    . . e e f 5 5 5 5 5 5 f e e . . 
+    . . . . c b 5 5 5 5 b c . . . . 
+    . . . . . f f f f f f . . . . . 
+    `, SpriteKind.Enemy)
+tiles.placeOnRandomTile(monster, sprites.dungeon.floorDark1)
+monster.follow(assasin, 15)
+lifeenemy = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
 lifeenemy.value = 100
+lifeenemy.attachToSprite(monster)
+statusbar = statusbars.create(20, 4, StatusBarKind.Health)
+statusbar.value = 100
+statusbar.attachToSprite(assasin)
 crthealthImg()
 controller.moveSprite(assasin)
 scene.cameraFollowSprite(assasin)
@@ -685,6 +769,3 @@ for (let value2 of tiles.getTilesByType(assets.tile`myTile3`)) {
     tiles.placeOnTile(myRedHouse, value2)
 }
 tiles.placeOnRandomTile(assasin, assets.tile`myTile`)
-game.onUpdateInterval(5000, function () {
-	
-})
