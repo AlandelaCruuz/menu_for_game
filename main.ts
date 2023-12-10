@@ -77,9 +77,6 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-	
-})
 function crthealthImg () {
     listafood = [img`
         . . . . . . . e c 7 . . . . . . 
@@ -134,90 +131,6 @@ function crthealthImg () {
         . c c c c c c c . . . . . . . . 
         `]
 }
-// Deliver packages up (A) or down (B)
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (assasin.y - monster.y < 20 && assasin.y - monster.y > -20) {
-        if (assasin.x <= monster.x) {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . 4 4 . . . . . . . 
-                . . . . . . 4 5 5 4 . . . . . . 
-                . . . . . . 2 5 5 2 . . . . . . 
-                . . . . . . . 2 2 . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, assasin, 50, 0)
-        } else {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . 4 4 . . . . . . . 
-                . . . . . . 4 5 5 4 . . . . . . 
-                . . . . . . 2 5 5 2 . . . . . . 
-                . . . . . . . 2 2 . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, assasin, -50, 0)
-        }
-    } else {
-        if (assasin.y <= monster.y) {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . 4 4 . . . . . . . 
-                . . . . . . 4 5 5 4 . . . . . . 
-                . . . . . . 2 5 5 2 . . . . . . 
-                . . . . . . . 2 2 . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, assasin, 0, 50)
-        } else {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . 4 4 . . . . . . . 
-                . . . . . . 4 5 5 4 . . . . . . 
-                . . . . . . 2 5 5 2 . . . . . . 
-                . . . . . . . 2 2 . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, assasin, 0, -50)
-        }
-    }
-})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     assasin,
@@ -297,6 +210,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
     monster.startEffect(effects.fire)
     sprites.destroy(monster)
+})
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    assasin.startEffect(effects.disintegrate)
+    sprites.destroy(assasin)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -550,7 +467,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         `)) {
         sprites.destroy(otherSprite)
         music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
-        statusbar.value += 30
+        statusbar.value += 40
     }
     if (otherSprite.image.equals(img`
         . . . . . . . 6 . . . . . . . . 
@@ -572,7 +489,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         `)) {
         sprites.destroy(otherSprite)
         music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
-        statusbar.value += 10
+        statusbar.value += 20
     }
     if (otherSprite.image.equals(img`
         . . . . . . . . . . . 6 6 6 6 6 
@@ -594,20 +511,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         `)) {
         sprites.destroy(otherSprite)
         music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
-        statusbar.value += 5
+        statusbar.value += 10
     }
 })
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    lifeenemy.value += -10
-    sprites.destroy(sprite)
-})
-let projectile: Sprite = null
 let myRedHouse: Sprite = null
 let myPurpleHouse: Sprite = null
 let listafood: Image[] = []
 let snackhealth: Sprite = null
 let statusbar: StatusBarSprite = null
-let lifeenemy: StatusBarSprite = null
 let monster: Sprite = null
 let assasin: Sprite = null
 tiles.setTilemap(tilemap`nivel`)
@@ -629,29 +540,28 @@ assasin = sprites.create(img`
     . . . . . . f f f f f f . . . . 
     . . . . . . . f f f . . . . . . 
     `, SpriteKind.Player)
-monster = sprites.create(img`
-    . . . . . . c c c . . . . . . . 
-    . . . . . . c 5 b c . . . . . . 
-    . . . . c c c 5 5 c c c . . . . 
-    . . c c c c 5 5 5 5 c b c c . . 
-    . c b b 5 b 5 5 5 5 b 5 b b c . 
-    . c b 5 5 b b 5 5 b b 5 5 b c . 
-    . . c 5 5 5 b b b b 5 5 5 f . . 
-    . . f f 5 5 5 5 5 5 5 5 f f . . 
-    . . f f f b f e e f b f f f . . 
-    . . f f f 1 f b b f 1 f f f . . 
-    . . . f f b b b b b b f f . . . 
-    . . . e e f e e e e f e e . . . 
-    . . e b f b 5 b b 5 b c b e . . 
-    . . e e f 5 5 5 5 5 5 f e e . . 
-    . . . . c b 5 5 5 5 b c . . . . 
-    . . . . . f f f f f f . . . . . 
-    `, SpriteKind.Enemy)
-tiles.placeOnRandomTile(monster, sprites.dungeon.floorDark1)
-monster.follow(assasin, 15)
-lifeenemy = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
-lifeenemy.value = 100
-lifeenemy.attachToSprite(monster)
+for (let index = 0; index < 4; index++) {
+    monster = sprites.create(img`
+        . . . . . . c c c . . . . . . . 
+        . . . . . . c 5 b c . . . . . . 
+        . . . . c c c 5 5 c c c . . . . 
+        . . c c c c 5 5 5 5 c b c c . . 
+        . c b b 5 b 5 5 5 5 b 5 b b c . 
+        . c b 5 5 b b 5 5 b b 5 5 b c . 
+        . . c 5 5 5 b b b b 5 5 5 f . . 
+        . . f f 5 5 5 5 5 5 5 5 f f . . 
+        . . f f f b f e e f b f f f . . 
+        . . f f f 1 f b b f 1 f f f . . 
+        . . . f f b b b b b b f f . . . 
+        . . . e e f e e e e f e e . . . 
+        . . e b f b 5 b b 5 b c b e . . 
+        . . e e f 5 5 5 5 5 5 f e e . . 
+        . . . . c b 5 5 5 5 b c . . . . 
+        . . . . . f f f f f f . . . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(monster, sprites.dungeon.floorDark1)
+    monster.follow(assasin, 10)
+}
 statusbar = statusbars.create(20, 4, StatusBarKind.Health)
 statusbar.value = 100
 statusbar.attachToSprite(assasin)
