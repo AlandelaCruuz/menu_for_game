@@ -1,6 +1,10 @@
 namespace SpriteKind {
     export const Object = SpriteKind.create()
+    export const citizen = SpriteKind.create()
 }
+statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.LT, statusbars.ComparisonType.Percentage, 50, function (status) {
+    assasin.sayText("Me estoy muriendo!", 2000, false)
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     assasin,
@@ -207,10 +211,6 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
-statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
-    monster.startEffect(effects.fire)
-    sprites.destroy(monster)
-})
 statusbars.onZero(StatusBarKind.Health, function (status) {
     assasin.startEffect(effects.disintegrate)
     sprites.destroy(assasin)
@@ -292,81 +292,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
-    statusbar.value += -2
-    animation.runImageAnimation(
-    monster,
-    [img`
-        . . . . . . . c c c . . . . . . 
-        . . . . . . c b 5 c . . . . . . 
-        . . . . c c c 5 5 c c c . . . . 
-        . . c c b c 5 5 5 5 c c c c . . 
-        . c b b 5 b 5 5 5 5 b 5 b b c . 
-        . c b 5 5 b b 5 5 b b 5 5 b c . 
-        . . f 5 5 5 b b b b 5 5 5 c . . 
-        . . f f 5 5 5 5 5 5 5 5 f f . . 
-        . . f f f b f e e f b f f f . . 
-        . . f f f 1 f b b f 1 f f f . . 
-        . . . f f b b b b b b f f . . . 
-        . . . e e f e e e e f e e . . . 
-        . . e b c b 5 b b 5 b f b e . . 
-        . . e e f 5 5 5 5 5 5 f e e . . 
-        . . . . c b 5 5 5 5 b c . . . . 
-        . . . . . f f f f f f . . . . . 
-        `,img`
-        . . . . . . . c c c . . . . . . 
-        . . . . . . c b 5 c . . . . . . 
-        . . . . c c c 5 5 c c c . . . . 
-        . . c c b c 5 5 5 5 c c c c . . 
-        . c b b 5 b 5 5 5 5 b 5 b b c . 
-        . c b 5 5 b b 5 5 b b 5 5 b c . 
-        . . f 5 5 5 b b b b 5 5 5 c . . 
-        . . f f 5 5 5 5 5 5 5 5 f f . . 
-        . . f f f b f e e f b f f f . . 
-        . . f f f 1 f b b f 1 f f f . . 
-        . . . f f b b b b b b f f . . . 
-        . . . e e f e e e e f e e . . . 
-        . . e b c b 5 b b 5 b f b e . . 
-        . . e e f 5 5 5 5 5 5 f e e . . 
-        . . . . c b 5 5 5 5 b c . . . . 
-        . . . . . f f f f f f . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . c c . . . . . . . . 
-        . . . . . . c 5 c . . . . . . . 
-        . . . . c c c 5 5 c c c . . . . 
-        . . c c c c 5 5 5 5 c b c c . . 
-        . c b b 5 b 5 5 5 5 b 5 b b c . 
-        . c b 5 5 b b 5 5 b b 5 5 b c . 
-        . . c 5 5 5 b b b b 5 5 5 f . . 
-        . . f f 5 5 5 5 5 5 5 5 f f . . 
-        . . f f f b f e e f b f f f . . 
-        . . f f f 1 f b b f 1 f f f . . 
-        . . . f f b b b b e e e f . . . 
-        . . e b b f e e e e b b e . . . 
-        . . e e f 5 5 b b e b b e . . . 
-        . . . f 5 5 5 5 5 e e c . . . . 
-        . . . . f f f f f f f . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . c c . . . . . . 
-        . . . . . . . c 5 c . . . . . . 
-        . . . . c c c 5 5 c c c . . . . 
-        . . c c b c 5 5 5 5 c c c c . . 
-        . c b b 5 b 5 5 5 5 b 5 b b c . 
-        . c b 5 5 b b 5 5 b b 5 5 b c . 
-        . . f 5 5 5 b b b b 5 5 5 c . . 
-        . . f f 5 5 5 5 5 5 5 5 f f . . 
-        . . f f f b f e e f b f f f . . 
-        . . f f f 1 f b b f 1 f f f . . 
-        . . . f e e e b b b b f f . . . 
-        . . . e b b e e e e f b b e . . 
-        . . . e b b e b b 5 5 f e e . . 
-        . . . . c e e 5 5 5 5 5 f . . . 
-        . . . . . f f f f f f f . . . . 
-        `],
-    200,
-    false
-    )
+    monster.sayText("Atrapadlo!", 2000, false)
+    statusbar.value += -10
+    music.play(music.melodyPlayable(music.powerDown), music.PlaybackMode.UntilDone)
 })
 // Change the car image based on the direction it's
 // driving
@@ -446,6 +374,11 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.citizen, function (sprite, otherSprite) {
+    game.showLongText("Hola, cuál es tu nombre? Necesito tu ayuda", DialogLayout.Bottom)
+    name_player = game.askForString("Introduce tu nombre")
+    pause(2000)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     if (otherSprite.image.equals(img`
         . . . . . . . e c 7 . . . . . . 
@@ -511,9 +444,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         `)) {
         sprites.destroy(otherSprite)
         music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
-        statusbar.value += 10
+        statusbar.value += 12
     }
 })
+let name_player = ""
 let myRedHouse: Sprite = null
 let myPurpleHouse: Sprite = null
 let listafood: Image[] = []
@@ -540,28 +474,47 @@ assasin = sprites.create(img`
     . . . . . . f f f f f f . . . . 
     . . . . . . . f f f . . . . . . 
     `, SpriteKind.Player)
-for (let index = 0; index < 4; index++) {
+let citizen = sprites.create(img`
+    . . . . f f f f . . . . . 
+    . . f f f f f f f f . . . 
+    . f f f f f f c f f f . . 
+    f f f f f f c c f f f c . 
+    f f f c f f f f f f f c . 
+    c c c f f f e e f f c c . 
+    f f f f f e e f f c c f . 
+    f f f b f e e f b f f f . 
+    . f 4 1 f 4 4 f 1 4 f . . 
+    . f e 4 4 4 4 4 4 e f . . 
+    . f f f e e e e f f f . . 
+    f e f b 7 7 7 7 b f e f . 
+    e 4 f 7 7 7 7 7 7 f 4 e . 
+    e e f 6 6 6 6 6 6 f e e . 
+    . . . f f f f f f . . . . 
+    . . . f f . . f f . . . . 
+    `, SpriteKind.citizen)
+for (let index = 0; index < 7; index++) {
     monster = sprites.create(img`
-        . . . . . . c c c . . . . . . . 
-        . . . . . . c 5 b c . . . . . . 
-        . . . . c c c 5 5 c c c . . . . 
-        . . c c c c 5 5 5 5 c b c c . . 
-        . c b b 5 b 5 5 5 5 b 5 b b c . 
-        . c b 5 5 b b 5 5 b b 5 5 b c . 
-        . . c 5 5 5 b b b b 5 5 5 f . . 
-        . . f f 5 5 5 5 5 5 5 5 f f . . 
-        . . f f f b f e e f b f f f . . 
-        . . f f f 1 f b b f 1 f f f . . 
-        . . . f f b b b b b b f f . . . 
-        . . . e e f e e e e f e e . . . 
-        . . e b f b 5 b b 5 b c b e . . 
-        . . e e f 5 5 5 5 5 5 f e e . . 
-        . . . . c b 5 5 5 5 b c . . . . 
-        . . . . . f f f f f f . . . . . 
+        . . f f f f f f f . . . . . . . 
+        . f f 3 b 3 b 3 f f . . . . . . 
+        f f b b 3 b 3 2 3 f f . . . . . 
+        f 3 b 3 b 2 b 3 b 3 f f . . . . 
+        f b 3 2 3 3 3 b 3 2 3 f . . . . 
+        f 7 7 7 7 2 7 7 7 7 7 f . . . . 
+        f 7 7 7 7 7 2 7 7 e 7 f . . . . 
+        f 7 7 f f 7 7 f f 7 7 f . . . . 
+        f e 7 7 7 7 7 7 7 7 e f . . . . 
+        . f e 7 7 b b 7 7 e f . . . . . 
+        . f f e 7 2 7 7 e f f . . . . . 
+        7 7 f b 1 1 7 1 b f 7 7 . . . . 
+        2 d f 1 1 7 1 1 1 f d 7 . . . . 
+        7 7 f 1 1 1 1 2 1 f 7 7 . . . . 
+        . . . f f f f f f . . . . . . . 
+        . . . f f . . f f . . . . . . . 
         `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(monster, sprites.dungeon.floorDark1)
+    tiles.placeOnRandomTile(monster, assets.tile`myTile2`)
     monster.follow(assasin, 10)
 }
+tiles.placeOnTile(citizen, tiles.getTileLocation(13, 15))
 statusbar = statusbars.create(20, 4, StatusBarKind.Health)
 statusbar.value = 100
 statusbar.attachToSprite(assasin)
@@ -678,4 +631,4 @@ for (let value2 of tiles.getTilesByType(assets.tile`myTile3`)) {
         `, SpriteKind.Object)
     tiles.placeOnTile(myRedHouse, value2)
 }
-tiles.placeOnRandomTile(assasin, assets.tile`myTile`)
+tiles.placeOnTile(assasin, tiles.getTileLocation(15, 15))
